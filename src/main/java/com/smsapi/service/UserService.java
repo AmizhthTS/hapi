@@ -21,6 +21,7 @@ public class UserService {
 	public String getUsersmemoryid() {
 		
         Response response = given()
+        					.baseUri("http://masterapilb:8080")
 				 			.auth().oauth2(token.getToken())
         					.contentType(ContentType.JSON)
                             .when()
@@ -37,6 +38,7 @@ public class UserService {
     	
     	Gson gson =new Gson();
         Response response = given()
+        					.baseUri("http://masterapilb:8080")
         					.auth().oauth2(token.getToken())
         					.contentType(ContentType.JSON)
                             .when()

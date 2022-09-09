@@ -64,7 +64,7 @@ public class RequestModel {
 		
 		Gson gson=new Gson();
 		
-		return gson.toJson(ResponseModel.builder().requestid(requestID).statuscode(statuscode).statusdescription(MessageStatus.getInstance().getStatusDescription(statuscode)).time(new Date().toLocaleString()), ResponseModel.class);
+		return gson.toJson(ResponseModel.builder().requestid(this.requestID).statuscode(this.statuscode).statusdescription(MessageStatus.getInstance().getStatusDescription(this.statuscode)).time(new Date().toLocaleString()).build(), ResponseModel.class);
 	}
 	
 }

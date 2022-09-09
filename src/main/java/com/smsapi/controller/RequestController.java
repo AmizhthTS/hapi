@@ -1,5 +1,7 @@
 package com.smsapi.controller;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.smsapi.model.RequestModel;
 import com.smsapi.model.UserCacheModel;
+import com.smsapi.util.StatusCode;
 
 @RestController
 public class RequestController {
@@ -19,6 +22,8 @@ public class RequestController {
 	@PostMapping("/send")
 	public ResponseEntity<?> login(@Valid @RequestBody RequestModel requestModel) {
 		
+		requestModel.setStatuscode(StatusCode.ACCEPT);
+	
 		return ResponseEntity.ok().body(requestModel.getResponse());
 	}
 	

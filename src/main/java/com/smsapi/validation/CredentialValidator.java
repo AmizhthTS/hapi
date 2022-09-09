@@ -1,12 +1,16 @@
 package com.smsapi.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
+import com.smsapi.model.ErrorField;
+import com.smsapi.model.ErrorModel;
 import com.smsapi.model.RequestModel;
 import com.smsapi.model.UserCacheModel;  
   
@@ -34,8 +38,14 @@ public class CredentialValidator implements ConstraintValidator<Credential,Reque
 
          }
     	 
+    	 	List<ErrorField> errors = new ArrayList<ErrorField>();
+        	
+            errors.add(new ErrorField("username","Invalid Credential",object.getUsername()));
+            errors.add(new ErrorField("password","Invalid Credential",""));
+
+        	ErrorModel error1 = new ErrorModel(HttpStatus.UNAUTHORIZED, "Validation Error",errors );
        
-    	 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid Credential");
+        	throw new ValidationException("Invalid Credential",error1,HttpStatus.UNAUTHORIZED);
   	
 
     }  

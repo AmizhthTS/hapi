@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.smsapi.model.ErrorField;
 import com.smsapi.model.ErrorModel;
+import com.smsapi.validation.ValidationException;
 
 
 @RestControllerAdvice
@@ -30,7 +32,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler {
         for (final ObjectError error : ex.getBindingResult().getAllErrors()) {
         	
         	if(error instanceof FieldError) {
-                errors.add(new ErrorField(((FieldError)error).getField(),error.getDefaultMessage(),((FieldError) error).getRejectedValue().toString()));
+                errors.add(new ErrorField(((FieldError)error).getField(),error.getDefaultMessage(),(String)((FieldError) error).getRejectedValue()));
 
         	}else {
         		
@@ -43,6 +45,13 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler {
 		ErrorModel error1 = new ErrorModel(HttpStatus.BAD_REQUEST, "Validation Error",errors );
 
         return new ResponseEntity<>(error1, HttpStatus.BAD_REQUEST);
+    }
+
+    
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<Object> getValidationException(ValidationException ex){
+    	
+           return new ResponseEntity<>(ex.getErrormodel(), ex.getHttpstatus());
     }
     
     

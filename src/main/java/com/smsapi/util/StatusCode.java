@@ -15,7 +15,7 @@ public interface StatusCode {
 	
 	public final static String INVALID_SENDERID="105";
 	
-	public final static String QUEUING_ERROR="106";
+	public final static String QUEUING_ERROR="701";
 	
 	
 }

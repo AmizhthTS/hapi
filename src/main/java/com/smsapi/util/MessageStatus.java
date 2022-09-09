@@ -22,6 +22,9 @@ public class MessageStatus {
 		STATUSMAP.put("104", "invalid Message Content");
 		
 		STATUSMAP.put("105", "invalid Senderid");
+		
+		STATUSMAP.put("701", "Send to Queue Error");
+
 
 		STATUSMAP.put("201", "User has not enough Balance for Send the Message");
 

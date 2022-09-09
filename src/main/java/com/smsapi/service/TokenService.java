@@ -19,7 +19,10 @@ public class TokenService {
 		UserModel bean=UserModel.builder().username("system").password("password").build();
     	
     	Gson gson =new Gson();
-        Response response = given().contentType(ContentType.JSON).body(gson.toJson(bean, UserModel.class))
+        Response response = given()
+        					.baseUri("http://masterapilb:8080")
+        					.contentType(ContentType.JSON)
+        					.body(gson.toJson(bean, UserModel.class))
                             .when()
                             .post("/sms-api/auth/login");
 
