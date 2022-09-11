@@ -1,5 +1,6 @@
 package com.smsapi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.Digits;
@@ -21,7 +22,9 @@ import lombok.Data;
 @Credential
 @RequestID
 @DependentParams
-public class RequestModel {
+public class RequestModel implements Serializable {
+	
+	private static final long serialVersionUID = 4L;
 
 	private String requestID;
 	
